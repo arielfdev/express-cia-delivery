@@ -2,11 +2,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Send, MapPin, Mail, Phone, Loader2 } from "lucide-react";
+import { Send, MapPin, Mail, Phone, Loader2, CheckCircle, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
 const contactSchema = z.object({
@@ -17,9 +16,13 @@ const contactSchema = z.object({
 
 type ContactFormData = z.infer<typeof contactSchema>;
 
+interface FormStatus {
+  type: "idle" | "loading" | "success" | "error";
+  message: string;
+}
+
 const ContactForm = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
+  const [formStatus, setFormStatus] = useState<FormStatus>({ type: "idle", message: "" });
 
   const {
     register,
@@ -31,30 +34,37 @@ const ContactForm = () => {
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    setIsSubmitting(true);
+    setFormStatus({ type: "loading", message: "Enviando mensagem..." });
+    
     try {
-      const { error } = await supabase.functions.invoke("send-email", {
+      const { data: response, error } = await supabase.functions.invoke("send-email", {
         body: data,
       });
 
       if (error) throw error;
 
-      toast({
-        title: "Mensagem enviada!",
-        description: "Entraremos em contato em breve.",
-      });
-      reset();
+      if (response?.success) {
+        setFormStatus({ 
+          type: "success", 
+          message: response.message || "Mensagem enviada com sucesso! Em breve entraremos em contato." 
+        });
+        reset();
+      } else {
+        setFormStatus({ 
+          type: "error", 
+          message: response?.message || "Erro ao enviar mensagem. Tente novamente mais tarde." 
+        });
+      }
     } catch (error) {
       console.error("Error sending email:", error);
-      toast({
-        title: "Erro ao enviar",
-        description: "Tente novamente ou entre em contato por telefone.",
-        variant: "destructive",
+      setFormStatus({ 
+        type: "error", 
+        message: "Erro ao enviar mensagem. Tente novamente mais tarde." 
       });
-    } finally {
-      setIsSubmitting(false);
     }
   };
+
+  const isSubmitting = formStatus.type === "loading";
 
   return (
     <section id="contato" className="py-24 bg-background relative overflow-hidden">
@@ -144,6 +154,26 @@ const ContactForm = () => {
           <div className="bg-card border border-border rounded-xl p-8">
             <h3 className="font-heading text-2xl font-bold mb-6">Envie sua mensagem</h3>
             
+            {/* Status Message */}
+            {formStatus.type !== "idle" && formStatus.type !== "loading" && (
+              <div 
+                className={`flex items-center gap-3 p-4 rounded-lg mb-6 border ${
+                  formStatus.type === "success" 
+                    ? "bg-secondary/50 border-border" 
+                    : "bg-secondary/30 border-border"
+                }`}
+              >
+                {formStatus.type === "success" ? (
+                  <CheckCircle className="w-5 h-5 text-foreground flex-shrink-0" />
+                ) : (
+                  <XCircle className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+                )}
+                <p className={formStatus.type === "success" ? "text-foreground" : "text-muted-foreground"}>
+                  {formStatus.message}
+                </p>
+              </div>
+            )}
+
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-2">
@@ -154,9 +184,10 @@ const ContactForm = () => {
                   {...register("name")}
                   placeholder="Seu nome completo"
                   className="h-12 bg-background border-border focus:border-foreground"
+                  disabled={isSubmitting}
                 />
                 {errors.name && (
-                  <p className="text-destructive text-sm mt-1">{errors.name.message}</p>
+                  <p className="text-muted-foreground text-sm mt-1">{errors.name.message}</p>
                 )}
               </div>
 
@@ -170,9 +201,10 @@ const ContactForm = () => {
                   {...register("email")}
                   placeholder="seu@email.com"
                   className="h-12 bg-background border-border focus:border-foreground"
+                  disabled={isSubmitting}
                 />
                 {errors.email && (
-                  <p className="text-destructive text-sm mt-1">{errors.email.message}</p>
+                  <p className="text-muted-foreground text-sm mt-1">{errors.email.message}</p>
                 )}
               </div>
 
@@ -186,9 +218,10 @@ const ContactForm = () => {
                   placeholder="Descreva sua necessidade de entrega..."
                   rows={5}
                   className="bg-background border-border focus:border-foreground resize-none"
+                  disabled={isSubmitting}
                 />
                 {errors.message && (
-                  <p className="text-destructive text-sm mt-1">{errors.message.message}</p>
+                  <p className="text-muted-foreground text-sm mt-1">{errors.message.message}</p>
                 )}
               </div>
 
