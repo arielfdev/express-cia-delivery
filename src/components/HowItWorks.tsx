@@ -29,19 +29,19 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section id="como-funciona" className="py-24 bg-card relative overflow-hidden">
+    <section id="como-funciona" className="py-20 md:py-24 lg:py-28 bg-card relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 border border-border rounded-full px-4 py-2 mb-6">
+          <div className="inline-flex items-center gap-2 border border-border rounded-full px-4 py-2 mb-6 opacity-0 animate-fade-in-up animation-delay-100">
             <span className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
               Como Funciona
             </span>
           </div>
-          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 opacity-0 animate-fade-in-up animation-delay-200 tracking-tight">
             Simples e <span className="font-black">rápido</span>
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-muted-foreground text-lg font-light opacity-0 animate-fade-in-up animation-delay-300">
             Em apenas 4 passos, sua entrega é realizada com toda a segurança e profissionalismo que você merece.
           </p>
         </div>
@@ -49,27 +49,31 @@ const HowItWorks = () => {
         {/* Steps */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((step, index) => (
-            <div key={index} className="relative group">
+            <div 
+              key={index} 
+              className={`relative group opacity-0 animate-fade-in-up`}
+              style={{ animationDelay: `${400 + index * 100}ms` }}
+            >
               {/* Connection Line */}
               {index < steps.length - 1 && (
                 <div className="hidden lg:block absolute top-12 left-[60%] w-full h-px bg-border" />
               )}
 
               {/* Card */}
-              <div className="relative bg-secondary border border-border rounded-xl p-8 text-center hover:bg-accent transition-all duration-300 hover:-translate-y-1">
+              <div className="relative bg-secondary border border-border rounded-xl p-8 text-center hover:bg-accent transition-all duration-200 ease-out hover:-translate-y-1 hover-glow">
                 {/* Step Number */}
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-foreground text-background font-heading font-bold text-sm px-4 py-1 rounded-full">
                   Passo {step.step}
                 </div>
 
                 {/* Icon */}
-                <div className="w-20 h-20 mx-auto mb-6 rounded-xl bg-background border border-border flex items-center justify-center group-hover:border-foreground transition-colors">
+                <div className="w-20 h-20 mx-auto mb-6 rounded-xl bg-background border border-border flex items-center justify-center group-hover:border-foreground/30 transition-colors duration-200">
                   <step.icon className="w-10 h-10 text-foreground" />
                 </div>
 
                 {/* Content */}
-                <h3 className="font-heading text-xl font-bold mb-3">{step.title}</h3>
-                <p className="text-muted-foreground">{step.description}</p>
+                <h3 className="font-heading text-xl font-bold mb-3 tracking-tight">{step.title}</h3>
+                <p className="text-muted-foreground font-light">{step.description}</p>
               </div>
             </div>
           ))}
