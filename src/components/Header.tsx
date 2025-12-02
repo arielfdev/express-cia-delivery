@@ -40,7 +40,7 @@ const Header = () => {
             <img 
               src={logo} 
               alt="CIA das Entregas" 
-              className="h-10 w-auto"
+              className="h-14 md:h-16 w-auto"
             />
           </a>
 
