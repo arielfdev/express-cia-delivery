@@ -1,6 +1,6 @@
 import { ArrowRight, Shield, Clock, Zap, Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/logo-cia-entregas.png";
+import logo from "@/assets/logo-cia-new.png";
 
 const Hero = () => {
   const scrollToContact = () => {
@@ -52,7 +52,7 @@ const Hero = () => {
             <img 
               src={logo} 
               alt="CIA das Entregas - Serviços Expressos" 
-              className="relative h-24 md:h-32 lg:h-40 w-auto"
+              className="relative h-32 md:h-40 lg:h-52 w-auto"
             />
           </div>
 
