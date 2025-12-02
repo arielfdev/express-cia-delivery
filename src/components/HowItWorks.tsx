@@ -29,20 +29,17 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section id="como-funciona" className="py-24 bg-surface-dark relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
-
+    <section id="como-funciona" className="py-24 bg-card relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-full px-4 py-2 mb-6">
-            <span className="text-sm font-medium text-primary uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 border border-border rounded-full px-4 py-2 mb-6">
+            <span className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
               Como Funciona
             </span>
           </div>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            Simples e <span className="text-gradient-gold">rápido</span>
+            Simples e <span className="font-black">rápido</span>
           </h2>
           <p className="text-muted-foreground text-lg">
             Em apenas 4 passos, sua entrega é realizada com toda a segurança e profissionalismo que você merece.
@@ -55,19 +52,19 @@ const HowItWorks = () => {
             <div key={index} className="relative group">
               {/* Connection Line */}
               {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-12 left-[60%] w-full h-0.5 bg-gradient-to-r from-primary/50 to-primary/10" />
+                <div className="hidden lg:block absolute top-12 left-[60%] w-full h-px bg-border" />
               )}
 
               {/* Card */}
-              <div className="relative bg-card border border-border/50 rounded-2xl p-8 text-center hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 shadow-card">
+              <div className="relative bg-secondary border border-border rounded-xl p-8 text-center hover:bg-accent transition-all duration-300 hover:-translate-y-1">
                 {/* Step Number */}
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-gold text-primary-foreground font-heading font-bold text-sm px-4 py-1 rounded-full">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-foreground text-background font-heading font-bold text-sm px-4 py-1 rounded-full">
                   Passo {step.step}
                 </div>
 
                 {/* Icon */}
-                <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                  <step.icon className="w-10 h-10 text-primary" />
+                <div className="w-20 h-20 mx-auto mb-6 rounded-xl bg-background border border-border flex items-center justify-center group-hover:border-foreground transition-colors">
+                  <step.icon className="w-10 h-10 text-foreground" />
                 </div>
 
                 {/* Content */}

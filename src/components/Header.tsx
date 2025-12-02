@@ -32,16 +32,12 @@ const Header = () => {
   ];
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/95 backdrop-blur-md shadow-lg" : "bg-transparent"
-      }`}
-    >
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <a href="#hero" onClick={() => scrollToSection("hero")} className="flex items-center">
-            <img src={logo} alt="CIA das Entregas" className="h-12 md:h-14 w-auto" />
+            <img src={logo} alt="CIA das Entregas" className="h-10 md:h-12 w-auto" />
           </a>
 
           {/* Desktop Navigation */}
@@ -50,7 +46,7 @@ const Header = () => {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="text-foreground/80 hover:text-primary font-medium transition-colors duration-200 text-sm uppercase tracking-wide"
+                className="text-foreground hover:text-gray-200 font-medium transition-colors duration-200 text-sm uppercase tracking-wide"
               >
                 {item.label}
               </button>
@@ -61,7 +57,7 @@ const Header = () => {
           <div className="hidden lg:flex items-center gap-4">
             <a
               href="tel:+5551984471357"
-              className="flex items-center gap-2 text-primary font-semibold"
+              className="flex items-center gap-2 text-foreground font-semibold hover:text-gray-200 transition-colors"
             >
               <Phone className="w-4 h-4" />
               (51) 98447-1357
@@ -82,20 +78,20 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden bg-card/95 backdrop-blur-md rounded-xl mt-2 p-6 animate-fade-in">
+          <div className="lg:hidden bg-card rounded-lg mt-2 p-6 animate-fade-in border border-border">
             <nav className="flex flex-col gap-4">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-foreground hover:text-primary font-medium py-2 text-left transition-colors"
+                  className="text-foreground hover:text-gray-200 font-medium py-2 text-left transition-colors"
                 >
                   {item.label}
                 </button>
               ))}
               <a
                 href="tel:+5551984471357"
-                className="flex items-center gap-2 text-primary font-semibold py-2"
+                className="flex items-center gap-2 text-foreground font-semibold py-2"
               >
                 <Phone className="w-4 h-4" />
                 (51) 98447-1357
