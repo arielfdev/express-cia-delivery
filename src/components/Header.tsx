@@ -32,16 +32,15 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50" style={{ backgroundColor: '#000000' }}>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <a href="#hero" onClick={() => scrollToSection("hero")} className="flex items-center">
             <img 
               src={logo} 
               alt="CIA das Entregas" 
-              className="w-auto"
-              style={{ maxHeight: '40px' }}
+              className="w-40 md:w-52 h-auto"
             />
           </a>
 
