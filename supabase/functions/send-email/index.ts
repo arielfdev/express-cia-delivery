@@ -1,15 +1,30 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 
+const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
 interface ContactEmailRequest {
   name: string;
   email: string;
   message: string;
+}
+
+// Validation functions
+function validateName(name: string): boolean {
+  return typeof name === "string" && name.trim().length >= 3;
+}
+
+function validateEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return typeof email === "string" && emailRegex.test(email.trim());
+}
+
+function validateMessage(message: string): boolean {
+  return typeof message === "string" && message.trim().length >= 10;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -22,69 +37,88 @@ const handler = async (req: Request): Promise<Response> => {
     const { name, email, message }: ContactEmailRequest = await req.json();
 
     // Validate inputs
-    if (!name || name.length < 3) {
-      throw new Error("Nome deve ter no mínimo 3 caracteres");
-    }
-    if (!email || !email.includes("@")) {
-      throw new Error("E-mail inválido");
-    }
-    if (!message || message.length < 10) {
-      throw new Error("Mensagem deve ter no mínimo 10 caracteres");
+    if (!validateName(name)) {
+      console.log("Validation failed: name");
+      return new Response(
+        JSON.stringify({ success: false, message: "Dados inválidos." }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
     }
 
-    // Log the contact request (in production, you would send an email here)
-    console.log("Nova solicitação de contato recebida:");
-    console.log(`Nome: ${name}`);
-    console.log(`E-mail: ${email}`);
-    console.log(`Mensagem: ${message}`);
+    if (!validateEmail(email)) {
+      console.log("Validation failed: email");
+      return new Response(
+        JSON.stringify({ success: false, message: "Dados inválidos." }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
 
-    // For now, we'll simulate a successful email send
-    // To enable actual email sending, you would need to:
-    // 1. Add RESEND_API_KEY secret
-    // 2. Uncomment the Resend integration below
+    if (!validateMessage(message)) {
+      console.log("Validation failed: message");
+      return new Response(
+        JSON.stringify({ success: false, message: "Dados inválidos." }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
 
-    /*
-    // Uncomment this section when you have RESEND_API_KEY configured
-    import { Resend } from "npm:resend@2.0.0";
-    const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
-    
-    const emailResponse = await resend.emails.send({
-      from: "CIA das Entregas <onboarding@resend.dev>",
-      to: ["ciadasentregas@yahoo.com.br"],
-      subject: `Nova solicitação de entrega - ${name}`,
-      html: `
-        <h2>Nova Solicitação de Contato</h2>
-        <p><strong>Nome:</strong> ${name}</p>
-        <p><strong>E-mail:</strong> ${email}</p>
-        <p><strong>Mensagem:</strong></p>
-        <p>${message}</p>
-      `,
+    const sanitizedName = name.trim();
+    const sanitizedEmail = email.trim();
+    const sanitizedMessage = message.trim();
+
+    console.log("Sending email for contact:", sanitizedName);
+
+    // Send email using Resend API directly
+    const emailResponse = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "CIA das Entregas <onboarding@resend.dev>",
+        to: ["ciadasentregas@yahoo.com.br"],
+        reply_to: sanitizedEmail,
+        subject: "Novo contato pelo site – CIA das Entregas",
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: #333;">Novo Contato pelo Site</h2>
+            <hr style="border: 1px solid #eee;">
+            <p><strong>Nome:</strong> ${sanitizedName}</p>
+            <p><strong>E-mail:</strong> ${sanitizedEmail}</p>
+            <p><strong>Mensagem:</strong></p>
+            <p style="background: #f5f5f5; padding: 15px; border-radius: 5px;">${sanitizedMessage.replace(/\n/g, '<br>')}</p>
+            <hr style="border: 1px solid #eee;">
+            <p style="color: #666; font-size: 12px;">Este e-mail foi enviado através do formulário de contato do site CIA das Entregas.</p>
+          </div>
+        `,
+        text: `Novo Contato pelo Site - CIA das Entregas\n\nNome: ${sanitizedName}\nE-mail: ${sanitizedEmail}\n\nMensagem:\n${sanitizedMessage}\n\n---\nEste e-mail foi enviado através do formulário de contato do site CIA das Entregas.`,
+      }),
     });
-    
-    console.log("Email sent successfully:", emailResponse);
-    */
+
+    if (!emailResponse.ok) {
+      const errorData = await emailResponse.text();
+      console.error("Resend API error:", errorData);
+      throw new Error("Failed to send email");
+    }
+
+    const emailData = await emailResponse.json();
+    console.log("Email sent successfully:", emailData);
 
     return new Response(
       JSON.stringify({ 
         success: true, 
-        message: "Mensagem recebida com sucesso!" 
+        message: "Mensagem enviada com sucesso! Em breve entraremos em contato." 
       }),
-      {
-        status: 200,
-        headers: {
-          "Content-Type": "application/json",
-          ...corsHeaders,
-        },
-      }
+      { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   } catch (error: any) {
     console.error("Error in send-email function:", error);
     return new Response(
-      JSON.stringify({ error: error.message }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json", ...corsHeaders },
-      }
+      JSON.stringify({ 
+        success: false, 
+        message: "Erro ao enviar mensagem. Tente novamente mais tarde." 
+      }),
+      { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   }
 };
