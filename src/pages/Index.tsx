@@ -1,13 +1,52 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Helmet } from "react-helmet-async";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import AboutUs from "@/components/AboutUs";
+import Services from "@/components/Services";
+import HowItWorks from "@/components/HowItWorks";
+import ContactForm from "@/components/ContactForm";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <>
+      <Helmet>
+        <title>CIA das Entregas - Serviços Expressos em Esteio e Região | Entregas Rápidas</title>
+        <meta
+          name="description"
+          content="CIA das Entregas oferece serviços de entregas expressas, coletas agendadas e transporte de materiais biológicos em Esteio/RS e região. Alvará sanitário, motoboy equipado e baús identificados. Solicite agora!"
+        />
+        <meta
+          name="keywords"
+          content="entregas expressas, motoboy Esteio, transporte materiais biológicos, coletas agendadas, entregas rápidas, delivery Esteio RS"
+        />
+        <meta name="author" content="CIA das Entregas" />
+        <link rel="canonical" href="https://ciadasentregas.com.br" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="CIA das Entregas - Serviços Expressos em Esteio e Região" />
+        <meta property="og:description" content="Entregas rápidas, seguras e profissionais. Especialistas em serviços expressos e transporte de materiais biológicos." />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="pt_BR" />
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="CIA das Entregas - Serviços Expressos" />
+        <meta name="twitter:description" content="Entregas rápidas, seguras e profissionais em Esteio e região." />
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main>
+          <Hero />
+          <AboutUs />
+          <Services />
+          <HowItWorks />
+          <ContactForm />
+        </main>
+        <Footer />
       </div>
-    </div>
+    </>
   );
 };
 
