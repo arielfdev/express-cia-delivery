@@ -1,6 +1,5 @@
 import { ArrowRight, Shield, Clock, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/logo-cia-entregas.png";
 
 const Hero = () => {
   const scrollToContact = () => {
@@ -26,15 +25,6 @@ const Hero = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-          {/* Logo - discreto acima do título */}
-          <div className="mb-8 opacity-0 animate-fade-in-up">
-            <img
-              src={logo}
-              alt="CIA das Entregas"
-              className="h-16 md:h-20 w-auto"
-            />
-          </div>
-
           {/* Badge */}
           <div className="inline-flex items-center gap-2 border border-border rounded-full px-4 py-2 mb-6 opacity-0 animate-fade-in-up animation-delay-100">
             <Zap className="w-4 h-4 text-foreground" />
