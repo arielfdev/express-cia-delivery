@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -18,33 +18,33 @@
     --primary: 0 0% 100%;
     --primary-foreground: 0 0% 0%;
 
-    --secondary: 0 0% 12%;
+    --secondary: 0 0% 10%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 70%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 0 0% 20%;
+    --accent: 0 0% 15%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
     --ring: 0 0% 100%;
 
     --radius: 0.5rem;
 
-    /* Custom grays */
-    --gray-100: 0 0% 87%;
-    --gray-200: 0 0% 70%;
-    --gray-300: 0 0% 50%;
-    --gray-400: 0 0% 30%;
-    --gray-500: 0 0% 20%;
-    --gray-600: 0 0% 12%;
-    --gray-700: 0 0% 7%;
-    --gray-800: 0 0% 4%;
+    /* Custom grays - pure neutral */
+    --gray-100: 0 0% 93%;
+    --gray-200: 0 0% 80%;
+    --gray-300: 0 0% 65%;
+    --gray-400: 0 0% 50%;
+    --gray-500: 0 0% 35%;
+    --gray-600: 0 0% 20%;
+    --gray-700: 0 0% 12%;
+    --gray-800: 0 0% 7%;
 
     --sidebar-background: 0 0% 0%;
     --sidebar-foreground: 0 0% 100%;
@@ -52,7 +52,7 @@
     --sidebar-primary-foreground: 0 0% 0%;
     --sidebar-accent: 0 0% 12%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 0 0% 20%;
+    --sidebar-border: 0 0% 18%;
     --sidebar-ring: 0 0% 100%;
   }
 
@@ -65,16 +65,16 @@
     --popover-foreground: 0 0% 100%;
     --primary: 0 0% 100%;
     --primary-foreground: 0 0% 0%;
-    --secondary: 0 0% 12%;
+    --secondary: 0 0% 10%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 70%;
-    --accent: 0 0% 20%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 0 0% 15%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
     --ring: 0 0% 100%;
   }
 }
@@ -89,7 +89,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Open Sans', sans-serif;
   }
 
@@ -106,14 +106,19 @@
   .glass-dark {
     @apply bg-card/80 backdrop-blur-md border border-border/50;
   }
+
+  /* Section spacing */
+  .section-padding {
+    @apply py-20 md:py-24 lg:py-28;
+  }
 }
 
 @layer utilities {
-  /* Animations */
+  /* Fade In Up Animation */
   @keyframes fade-in-up {
     0% {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(20px);
     }
     100% {
       opacity: 1;
@@ -121,6 +126,7 @@
     }
   }
 
+  /* Fade In Animation */
   @keyframes fade-in {
     0% {
       opacity: 0;
@@ -130,10 +136,11 @@
     }
   }
 
+  /* Slide In Left */
   @keyframes slide-in-left {
     0% {
       opacity: 0;
-      transform: translateX(-30px);
+      transform: translateX(-20px);
     }
     100% {
       opacity: 1;
@@ -141,33 +148,79 @@
     }
   }
 
+  /* Slide In Right */
   @keyframes slide-in-right {
     0% {
       opacity: 0;
-      transform: translateX(30px);
+      transform: translateX(20px);
     }
     100% {
       opacity: 1;
       transform: translateX(0);
+    }
+  }
+
+  /* Scale In */
+  @keyframes scale-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Subtle Pulse */
+  @keyframes subtle-pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.85;
+    }
+  }
+
+  /* Glow Effect */
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+    50% {
+      box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.1);
     }
   }
 
   .animate-fade-in-up {
-    animation: fade-in-up 0.6s ease-out forwards;
+    animation: fade-in-up 0.5s ease-out forwards;
   }
 
   .animate-fade-in {
-    animation: fade-in 0.5s ease-out forwards;
+    animation: fade-in 0.4s ease-out forwards;
   }
 
   .animate-slide-in-left {
-    animation: slide-in-left 0.6s ease-out forwards;
+    animation: slide-in-left 0.5s ease-out forwards;
   }
 
   .animate-slide-in-right {
-    animation: slide-in-right 0.6s ease-out forwards;
+    animation: slide-in-right 0.5s ease-out forwards;
   }
 
+  .animate-scale-in {
+    animation: scale-in 0.4s ease-out forwards;
+  }
+
+  .animate-subtle-pulse {
+    animation: subtle-pulse 2s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite;
+  }
+
+  /* Animation Delays */
   .animation-delay-100 {
     animation-delay: 100ms;
   }
@@ -186,5 +239,60 @@
 
   .animation-delay-500 {
     animation-delay: 500ms;
+  }
+
+  .animation-delay-600 {
+    animation-delay: 600ms;
+  }
+
+  .animation-delay-700 {
+    animation-delay: 700ms;
+  }
+
+  .animation-delay-800 {
+    animation-delay: 800ms;
+  }
+
+  /* Hover Effects */
+  .hover-lift {
+    @apply transition-transform duration-200 ease-out;
+  }
+
+  .hover-lift:hover {
+    @apply -translate-y-1;
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-200 ease-out;
+  }
+
+  .hover-scale:hover {
+    @apply scale-[1.02];
+  }
+
+  .hover-glow {
+    @apply transition-shadow duration-300 ease-out;
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 30px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in-up,
+    .animate-fade-in,
+    .animate-slide-in-left,
+    .animate-slide-in-right,
+    .animate-scale-in {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+
+    .hover-lift:hover,
+    .hover-scale:hover {
+      transform: none;
+    }
   }
 }

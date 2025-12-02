@@ -35,20 +35,20 @@ const Services = () => {
   ];
 
   return (
-    <section id="servicos" className="py-24 bg-background relative overflow-hidden">
+    <section id="servicos" className="py-20 md:py-24 lg:py-28 bg-background relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 border border-border rounded-full px-4 py-2 mb-6">
+          <div className="inline-flex items-center gap-2 border border-border rounded-full px-4 py-2 mb-6 opacity-0 animate-fade-in-up animation-delay-100">
             <span className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
               Nossos Serviços
             </span>
           </div>
-          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 opacity-0 animate-fade-in-up animation-delay-200 tracking-tight">
             Soluções completas em{" "}
             <span className="font-black">entregas expressas</span>
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-muted-foreground text-lg font-light opacity-0 animate-fade-in-up animation-delay-300">
             Oferecemos uma gama completa de serviços de entrega para atender todas as suas necessidades, com segurança e profissionalismo.
           </p>
         </div>
@@ -58,23 +58,24 @@ const Services = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className="group relative bg-card border border-border rounded-xl p-8 hover:bg-secondary transition-all duration-300 hover:-translate-y-1"
+              className={`group relative bg-card border border-border rounded-xl p-8 hover:bg-secondary transition-all duration-200 ease-out hover:-translate-y-1 hover-glow opacity-0 animate-fade-in-up`}
+              style={{ animationDelay: `${400 + index * 100}ms` }}
             >
               {/* Icon */}
-              <div className="w-14 h-14 rounded-lg bg-foreground flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-14 h-14 rounded-xl bg-foreground flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-200">
                 <service.icon className="w-7 h-7 text-background" />
               </div>
 
               {/* Content */}
-              <h3 className="font-heading text-xl font-bold mb-3">
+              <h3 className="font-heading text-xl font-bold mb-3 tracking-tight">
                 {service.title}
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed font-light">
                 {service.description}
               </p>
 
               {/* Hover Effect Line */}
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-foreground rounded-b-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-foreground rounded-b-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
             </div>
           ))}
         </div>

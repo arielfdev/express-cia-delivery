@@ -32,7 +32,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-secondary">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
@@ -40,7 +40,7 @@ const Header = () => {
             <img 
               src={logo} 
               alt="CIA das Entregas" 
-              className="h-14 md:h-16 w-auto"
+              className="h-10 w-auto"
             />
           </a>
 
@@ -50,7 +50,7 @@ const Header = () => {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="text-foreground hover:text-gray-200 font-medium transition-colors duration-200 text-sm uppercase tracking-wide"
+                className="text-foreground hover:text-gray-300 font-medium transition-colors duration-200 text-sm uppercase tracking-wide"
               >
                 {item.label}
               </button>
@@ -58,15 +58,15 @@ const Header = () => {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-6">
             <a
               href="tel:+5551984471357"
-              className="flex items-center gap-2 text-foreground font-semibold hover:text-gray-200 transition-colors"
+              className="flex items-center gap-2 text-foreground font-medium hover:text-gray-300 transition-colors duration-200"
             >
               <Phone className="w-4 h-4" />
-              (51) 98447-1357
+              <span className="text-sm">(51) 98447-1357</span>
             </a>
-            <Button variant="hero" onClick={() => scrollToSection("contato")}>
+            <Button variant="hero" size="default" onClick={() => scrollToSection("contato")}>
               Solicitar Entrega
             </Button>
           </div>
@@ -88,14 +88,14 @@ const Header = () => {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-foreground hover:text-gray-200 font-medium py-2 text-left transition-colors"
+                  className="text-foreground hover:text-gray-300 font-medium py-2 text-left transition-colors duration-200"
                 >
                   {item.label}
                 </button>
               ))}
               <a
                 href="tel:+5551984471357"
-                className="flex items-center gap-2 text-foreground font-semibold py-2"
+                className="flex items-center gap-2 text-foreground font-medium py-2"
               >
                 <Phone className="w-4 h-4" />
                 (51) 98447-1357

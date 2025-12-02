@@ -9,24 +9,24 @@ const AboutUs = () => {
   ];
 
   return (
-    <section id="sobre" className="py-24 bg-card relative overflow-hidden">
+    <section id="sobre" className="py-20 md:py-24 lg:py-28 bg-card relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Content */}
           <div className="order-2 lg:order-1">
-            <div className="inline-flex items-center gap-2 border border-border rounded-full px-4 py-2 mb-6">
+            <div className="inline-flex items-center gap-2 border border-border rounded-full px-4 py-2 mb-6 opacity-0 animate-slide-in-left animation-delay-100">
               <span className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Sobre Nós</span>
             </div>
 
-            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 opacity-0 animate-slide-in-left animation-delay-200 tracking-tight">
               Soluções <span className="font-black">rápidas</span> e profissionais
             </h2>
 
-            <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-              A <strong className="text-foreground">CIA das Entregas</strong> atua oferecendo soluções rápidas e profissionais em coletas e entregas, incluindo o transporte seguro de <strong className="text-foreground">materiais biológicos</strong>.
+            <p className="text-muted-foreground text-lg leading-relaxed mb-6 opacity-0 animate-slide-in-left animation-delay-300 font-light">
+              A <strong className="text-foreground font-semibold">CIA das Entregas</strong> atua oferecendo soluções rápidas e profissionais em coletas e entregas, incluindo o transporte seguro de <strong className="text-foreground font-semibold">materiais biológicos</strong>.
             </p>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-              A empresa possui alvará sanitário, motocicleta regulamentada, motoboys equipados e baús identificados, garantindo <strong className="text-foreground">agilidade, segurança e conformidade</strong> em cada operação.
+            <p className="text-muted-foreground text-lg leading-relaxed mb-8 opacity-0 animate-slide-in-left animation-delay-400 font-light">
+              A empresa possui alvará sanitário, motocicleta regulamentada, motoboys equipados e baús identificados, garantindo <strong className="text-foreground font-semibold">agilidade, segurança e conformidade</strong> em cada operação.
             </p>
 
             {/* Features Grid */}
@@ -34,7 +34,8 @@ const AboutUs = () => {
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-3 bg-secondary border border-border rounded-lg p-4 hover:bg-accent transition-colors"
+                  className={`flex items-center gap-3 bg-secondary border border-border rounded-xl p-4 hover:bg-accent transition-all duration-200 hover-lift opacity-0 animate-fade-in-up`}
+                  style={{ animationDelay: `${500 + index * 100}ms` }}
                 >
                   <div className="w-10 h-10 rounded-lg bg-background flex items-center justify-center flex-shrink-0">
                     <feature.icon className="w-5 h-5 text-foreground" />
@@ -46,16 +47,16 @@ const AboutUs = () => {
           </div>
 
           {/* Visual */}
-          <div className="order-1 lg:order-2 flex justify-center">
+          <div className="order-1 lg:order-2 flex justify-center opacity-0 animate-slide-in-right animation-delay-300">
             <div className="relative">
               {/* Main card */}
-              <div className="bg-secondary border border-border rounded-2xl p-8 md:p-12">
+              <div className="bg-secondary border border-border rounded-2xl p-8 md:p-12 hover-glow transition-all duration-300">
                 <div className="text-center">
                   <div className="w-24 h-24 mx-auto mb-6 rounded-xl bg-foreground flex items-center justify-center">
                     <Truck className="w-12 h-12 text-background" />
                   </div>
-                  <h3 className="font-heading text-2xl font-bold mb-3">Entrega Garantida</h3>
-                  <p className="text-muted-foreground mb-6">
+                  <h3 className="font-heading text-2xl font-bold mb-3 tracking-tight">Entrega Garantida</h3>
+                  <p className="text-muted-foreground mb-6 font-light">
                     Reposição de veículo em caso de imprevistos
                   </p>
                   <div className="flex justify-center gap-2">
