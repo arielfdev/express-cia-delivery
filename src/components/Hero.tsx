@@ -1,5 +1,6 @@
 import { ArrowRight, Shield, Clock, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo-cia-entregas.png";
 
 const Hero = () => {
   const scrollToContact = () => {
@@ -25,14 +26,21 @@ const Hero = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+          {/* Logo */}
+          <img 
+            src={logo} 
+            alt="CIA das Entregas - Serviços Expressos" 
+            className="h-24 md:h-32 lg:h-40 w-auto mb-8 opacity-0 animate-fade-in-up animation-delay-100"
+          />
+
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 border border-border rounded-full px-4 py-2 mb-8 opacity-0 animate-fade-in-up animation-delay-100">
+          <div className="inline-flex items-center gap-2 border border-border rounded-full px-4 py-2 mb-8 opacity-0 animate-fade-in-up animation-delay-200">
             <Zap className="w-4 h-4 text-foreground" />
             <span className="text-sm font-medium text-muted-foreground">Serviços Expressos em Esteio e Região</span>
           </div>
 
           {/* Main Headline */}
-          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-6 leading-tight opacity-0 animate-fade-in-up animation-delay-200 tracking-tight">
+          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-6 leading-tight opacity-0 animate-fade-in-up animation-delay-300 tracking-tight">
             Entrega <span className="font-black">rápida</span>, segura e{" "}
             <span className="font-black">profissional</span>
           </h1>
