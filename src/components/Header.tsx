@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo-cia-entregas.png";
 
@@ -58,14 +58,7 @@ const Header = () => {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center gap-6">
-            <a
-              href="tel:+5551984471357"
-              className="flex items-center gap-2 text-foreground font-medium hover:text-gray-300 transition-colors duration-200"
-            >
-              <Phone className="w-4 h-4" />
-              <span className="text-sm">(51) 98447-1357</span>
-            </a>
+          <div className="hidden lg:flex items-center">
             <Button variant="hero" size="default" onClick={() => scrollToSection("contato")}>
               Solicitar Entrega
             </Button>
@@ -93,13 +86,6 @@ const Header = () => {
                   {item.label}
                 </button>
               ))}
-              <a
-                href="tel:+5551984471357"
-                className="flex items-center gap-2 text-foreground font-medium py-2"
-              >
-                <Phone className="w-4 h-4" />
-                (51) 98447-1357
-              </a>
               <Button
                 variant="hero"
                 className="mt-2 w-full"

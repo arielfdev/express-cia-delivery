@@ -64,14 +64,8 @@ const Hero = () => {
 
           {/* Main Headline */}
           <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-6 leading-tight opacity-0 animate-fade-in-up animation-delay-300 tracking-tight">
-            Entrega <span className="font-black relative">
-              rápida
-              <span className="absolute -bottom-2 left-0 right-0 h-1 bg-foreground/20 rounded-full" />
-            </span>, segura e{" "}
-            <span className="font-black relative">
-              profissional
-              <span className="absolute -bottom-2 left-0 right-0 h-1 bg-foreground/20 rounded-full" />
-            </span>
+            Entrega <span className="font-black">rápida</span>, segura e{" "}
+            <span className="font-black">profissional</span>
           </h1>
 
           {/* Subheadline */}
