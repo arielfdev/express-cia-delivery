@@ -1,5 +1,5 @@
 import { MapPin, Mail, Phone } from "lucide-react";
-import logo from "@/assets/logo-cia-entregas.png";
+import logo from "@/assets/logo-cia-new.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Logo & Description */}
           <div className="lg:col-span-2">
-            <img src={logo} alt="CIA das Entregas" className="h-16 md:h-20 w-auto max-w-[280px] mb-6" />
+            <img src={logo} alt="CIA das Entregas" className="h-20 md:h-24 w-auto max-w-[320px] mb-6" />
             <p className="text-muted-foreground max-w-md mb-8 font-light leading-relaxed">
               Soluções rápidas e profissionais em coletas e entregas, incluindo transporte seguro de materiais biológicos. Agilidade, segurança e conformidade em cada operação.
             </p>

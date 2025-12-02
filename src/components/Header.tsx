@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/logo-cia-entregas.png";
+import logo from "@/assets/logo-cia-new.png";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -40,7 +40,7 @@ const Header = () => {
             <img 
               src={logo} 
               alt="CIA das Entregas" 
-              className="h-20 md:h-24 w-auto max-w-[240px] md:max-w-[320px]"
+              className="h-16 md:h-20 w-auto max-w-[200px] md:max-w-[280px]"
             />
           </a>
 
