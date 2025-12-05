@@ -27,6 +27,7 @@ const Header = () => {
     { label: "Início", id: "hero" },
     { label: "Sobre", id: "sobre" },
     { label: "Serviços", id: "servicos" },
+    { label: "Frota", id: "frota" },
     { label: "Como Funciona", id: "como-funciona" },
     { label: "Contato", id: "contato" },
   ];
